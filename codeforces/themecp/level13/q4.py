@@ -23,6 +23,16 @@ def solve():
     if '0' in a:
         return 0
     
+    a = list(map(int, a))
+    
+    suma = [a[0]]
+
+    for i in range(n-1):
+        temp = suma[-1] + min(a[i]+a[i+1], a[i] * a[i+1])
+        suma.append(temp)
+
+    print(suma)
+    
 
         
 
