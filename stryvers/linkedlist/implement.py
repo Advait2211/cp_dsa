@@ -52,11 +52,11 @@ class linkedlist:
 ll = linkedlist()
 
 ll.append(10)
-ll.append(9)
-ll.append(10)
+# ll.append(9)
+# ll.append(10)
 ll.display()
 
-print(ll.delete(1))
+print(ll.delete(10))
 
 ll.display()
 
