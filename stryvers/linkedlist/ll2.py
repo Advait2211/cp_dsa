@@ -28,7 +28,7 @@ class LinkedList:
             prev = cur
             cur = cur.next
 
-        if cur.next == None: # this only works if the element in question to delete the last one
+        if cur.next == None: # fixed now
             prev.next = None
         else:
             cur.data = cur.next.data
