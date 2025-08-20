@@ -1,7 +1,7 @@
 def solve():
     n = int(input())
     a = list(map(int, input().split()))
-    a3 = map(int, input().split())
+    x, y, z = map(int, input().split())
 
 
 
