@@ -1,0 +1,1 @@
+{"name":"Local: q1","url":"/Users/advaitdesai/Programming/CpDsa/codeforces/div2r1055/q1.py","tests":[{"id":1759561431329,"input":"3\n3\n1 1 3\n1\n100\n9\n9 9 3 2 4 4 8 5 3\n","output":"3\n1\n11\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/advaitdesai/Programming/CpDsa/codeforces/div2r1055/q1.py","group":"local","local":true}

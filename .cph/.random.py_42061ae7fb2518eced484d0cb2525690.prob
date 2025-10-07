@@ -1,0 +1,1 @@
+{"name":"Local: random","url":"/Users/advaitdesai/Programming/CpDsa/random.py","tests":[{"id":1759390175511,"input":"3\n3\n-1 0 1\n4\n-1 -1 0 1\n5\n-1 -1 -1 0 0\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/advaitdesai/Programming/CpDsa/random.py","group":"local","local":true}
