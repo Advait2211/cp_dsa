@@ -1,0 +1,1 @@
+{"name":"Local: playlist","url":"/Users/advaitdesai/Programming/CpDsa/cses/sorting_searching/playlist.cpp","tests":[{"id":1762414233996,"input":"10\n2 2 1 1 2 1 2 1 2 1","output":"4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/advaitdesai/Programming/CpDsa/cses/sorting_searching/playlist.cpp","group":"local","local":true}

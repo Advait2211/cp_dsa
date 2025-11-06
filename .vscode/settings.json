@@ -3,6 +3,16 @@
     "files.associations": {
         "*.ejs": "html",
         "ostream": "cpp",
-        "print": "cpp"
+        "print": "cpp",
+        "iostream": "cpp",
+        "__tree": "cpp",
+        "map": "cpp",
+        "format": "cpp"
+    },
+    "C_Cpp.default.compilerPath": "/opt/homebrew/bin/g++-15",
+    "C_Cpp.default.cppStandard": "gnu++17",
+    "C_Cpp.default.intelliSenseMode": "gcc-arm64",
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && /opt/homebrew/bin/g++-15 -std=gnu++17 $fileName -o $fileNameWithoutExt && $dir/$fileNameWithoutExt"
     }
 }

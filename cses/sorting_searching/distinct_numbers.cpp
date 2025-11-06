@@ -1,4 +1,18 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+#include <string>
+#include <sstream>
+#include <cassert>
+#include <unordered_set>
+#include <chrono>
+#include <iomanip>
+#include <type_traits>
+#include <utility>
+#include <iterator>
+#include <functional>
+#include<vector>
 using namespace std;
 
 #define ll long long
@@ -109,14 +123,14 @@ inline void dbgi(Fs& f, R&... r){dbgi(f);debugVarNameIdx++;dbgi(r...);}
 #define dbg(...) do { \
     debugVarName = split(#__VA_ARGS__); \
     debugVarNameIdx = 0;\
-    dbgi(__VA_ARGS__);\
+    dbgi(__VA_ARGS__);\lear
     cout << endl; \
 } while(0)
 
-template<typename T>
-inline auto vec(int n, T in){return MyVector(n, in);}
-template<typename... Args>
-inline auto vec(int n, Args... args) {return MyVector(n, vec(args...));}
+// template<typename T>
+// inline auto vec(int n, T in){return MyVector(n, in);}
+// template<typename... Args>
+// inline auto vec(int n, Args... args) {return MyVector(n, vec(args...));}
 
 template<typename T>
 inline void fill(T& x){cin >> x;}

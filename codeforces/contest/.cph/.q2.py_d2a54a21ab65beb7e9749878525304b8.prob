@@ -1,0 +1,1 @@
+{"name":"Local: q2","url":"/Users/advaitdesai/Programming/CpDsa/codeforces/contest/q2.py","tests":[{"id":1761318777617,"input":"3\n2 2\nAA\n3 4\n1 1\nB\n20\n6 4\nBAABBA\n2 8 32 95\n","output":"3\n4\n5\n2\n5\n8\n11\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/advaitdesai/Programming/CpDsa/codeforces/contest/q2.py","group":"local","local":true}

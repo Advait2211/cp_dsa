@@ -1,0 +1,1 @@
+{"name":"Local: sorted","url":"/Users/advaitdesai/Programming/CpDsa/cses/runcpp/sorted.cpp","tests":[{"id":1761987938577,"input":"5\n4 3 1 2 5","output":"1 2 3 4 5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/advaitdesai/Programming/CpDsa/cses/runcpp/sorted.cpp","group":"local","local":true}
