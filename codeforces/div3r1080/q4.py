@@ -41,15 +41,23 @@ def solve():
 
     total = (a[0] + a[-1]) // (n-1)
 
-    print(total)
+    # print(total)
+    psum = 0
 
-    first = ((a[1] + a[-1]) - (n-1)) // 2
+    for i in range(n-1):
+        val = total - (a[i] - a[i+1]) - psum
+        psum += val
+        print(val//2, end = " ")
 
-    print(first)
+    print(total - psum//2)
+
+
+
+
 
 
 
 
 t = int(input())
 for _ in range(t):
-    print(solve())
+    solve()

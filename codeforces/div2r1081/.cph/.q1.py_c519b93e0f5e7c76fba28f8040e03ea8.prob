@@ -1,0 +1,1 @@
+{"name":"Local: q1","url":"/Users/advaitdesai/Programming/CpDsa/codeforces/1081/q1.py","tests":[{"id":1771684625969,"input":"4\n4\nabcd\n4\nabbc\n4\nabba\n6\ncbbccc\n","output":"4\n4\n3\n4\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/advaitdesai/Programming/CpDsa/codeforces/1081/q1.py","group":"local","local":true}
