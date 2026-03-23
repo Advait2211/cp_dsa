@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jan-Seva — Connecting Local Skills with Local Opportunities</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0A0A0A;
+      --surface: #111111;
+      --card: #161616;
+      --border: #252525;
+      --accent: #E8FF47;
+      --accent2: #FF6B35;
+      --text: #F0EDE6;
+      --muted: #6B6B6B;
+      --green: #4ADE80;
+      --pink: #FF4D6D;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 64px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(232, 255, 71, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(255, 107, 53, 0.08) 0%, transparent 50%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+      opacity: 0.4;
+    }
+
+    .hero-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(52px, 8vw, 110px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 480px;
+      margin-top: 24px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .hero-bottom {
+      display: flex;
+      gap: 24px;
+      margin-top: 48px;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 10px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .pill-accent {
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .pill-accent:hover {
+      opacity: 0.88;
+    }
+
+    /* ── SECTION FRAMEWORK ── */
+    section {
+      padding: 120px 64px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-eyebrow span {
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 60px;
+    }
+
+    /* ── LIVELIHOOD ── */
+    .livelihood-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .liv-card {
+      background: var(--card);
+      padding: 40px 36px;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .liv-card:hover {
+      background: #1D1D1D;
+    }
+
+    .liv-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      margin-bottom: 20px;
+    }
+
+    .liv-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .liv-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-weight: 400;
+    }
+
+    .liv-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(232, 255, 71, 0.1);
+      border: 1px solid rgba(232, 255, 71, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* ── USER PROFILES ── */
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .profile-card {
+      background: var(--card);
+      padding: 48px 48px;
+    }
+
+    .profile-header {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 36px;
+    }
+
+    .profile-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 0;
+      background: var(--border);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .profile-role {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .profile-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .stat-cell {
+      background: var(--surface);
+      padding: 14px 16px;
+    }
+
+    .stat-cell .label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .stat-cell .val {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .problem-section {
+      margin-top: 32px;
+    }
+
+    .problem-section h4 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 16px;
+    }
+
+    .problem-list {
+      list-style: none;
+    }
+
+    .problem-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      display: flex;
+      gap: 10px;
+    }
+
+    .problem-list li:last-child {
+      border-bottom: none;
+    }
+
+    .problem-list li::before {
+      content: '↗️';
+      color: var(--pink);
+      flex-shrink: 0;
+    }
+
+    .result-box {
+      margin-top: 24px;
+      background: rgba(255, 77, 109, 0.08);
+      border: 1px solid rgba(255, 77, 109, 0.2);
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .result-box strong {
+      color: var(--pink);
+    }
+
+    /* ── SOLUTIONS FAIL ── */
+    .fail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .fail-col h3 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .fail-item {
+      border: 1px solid var(--border);
+      background: var(--card);
+      margin-bottom: 12px;
+    }
+
+    .fail-item-header {
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .fail-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      padding: 3px 8px;
+      background: rgba(255, 77, 109, 0.15);
+      color: var(--pink);
+      letter-spacing: 0.08em;
+    }
+
+    .fail-bullets {
+      padding: 12px 18px;
+    }
+
+    .fail-bullets li {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.8;
+      list-style: none;
+      padding: 2px 0;
+      display: flex;
+      gap: 8px;
+    }
+
+    .fail-bullets li::before {
+      content: '—';
+      color: var(--border);
+    }
+
+    .gap-box {
+      border: 1px solid var(--accent);
+      background: rgba(232, 255, 71, 0.04);
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .gap-label {
+      font-family: 'Instrument Serif', serif;
+      font-size: 48px;
+      color: var(--accent);
+      line-height: 1;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 0.05em;
+    }
+
+    .gap-needs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .gap-need {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gap-need::before {
+      content: '✓';
+      color: var(--accent);
+      font-size: 11px;
+    }
+
+    .gap-tagline {
+      margin-top: 28px;
+      font-size: 15px;
+      color: var(--text);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      grid-column: 1/-1;
+    }
+
+    /* ── SOLUTION ── */
+    .solution-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    .solution-intro {
+      background: var(--card);
+      padding: 48px;
+      grid-column: 1/-1;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .sol-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 72px;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      min-width: 280px;
+    }
+
+    .sol-name span {
+      display: block;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .sol-desc {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    .how-card,
+    .gets-card {
+      background: var(--card);
+      padding: 40px 44px;
+    }
+
+    .how-card h3,
+    .gets-card h3 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 28px;
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step:last-child {
+      border-bottom: none;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-content h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .whatsapp-demo {
+      background: #0B1410;
+      border: 1px solid #1A3A2A;
+      padding: 16px 20px;
+      margin: 12px 0;
+      border-radius: 2px;
+    }
+
+    .whatsapp-bubble {
+      background: #1F6B45;
+      padding: 10px 14px;
+      display: inline-block;
+      font-size: 13px;
+      color: #fff;
+      border-radius: 0 8px 8px 8px;
+      margin-bottom: 4px;
+    }
+
+    .whatsapp-bubble.hindi {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+    }
+
+    .wa-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: #1F6B45;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .feature-tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .ftag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      font-size: 12px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ftag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .gets-list {
+      list-style: none;
+    }
+
+    .gets-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .gets-list li:last-child {
+      border-bottom: none;
+    }
+
+    .gets-list li::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      font-weight: 800;
+    }
+
+    /* ── ARCHITECTURE ── */
+    .arch-stack {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 32px;
+    }
+
+    .arch-card {
+      background: var(--card);
+      padding: 36px 32px;
+      transition: background 0.3s;
+    }
+
+    .arch-card:hover {
+      background: #1A1A1A;
+    }
+
+    .arch-card-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .arch-card-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .arch-card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .flow-diagram {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 40px 48px;
+      margin-bottom: 2px;
+    }
+
+    .flow-diagram h3 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .flow-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .flow-step {
+      flex: 1;
+      min-width: 140px;
+      border: 1px solid var(--border);
+      padding: 16px 20px;
+      font-size: 12px;
+      text-align: center;
+      position: relative;
+      background: var(--surface);
+    }
+
+    .flow-step strong {
+      display: block;
+      color: var(--accent);
+      font-size: 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .flow-arrow {
+      color: var(--muted);
+      font-size: 18px;
+      padding: 0 8px;
+      flex-shrink: 0;
+    }
+
+    /* ── UNIT ECONOMICS ── */
+    .econ-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .econ-left,
+    .econ-right {
+      background: var(--card);
+      padding: 48px;
+    }
+
+    .big-number {
+      font-family: 'Instrument Serif', serif;
+      font-size: 96px;
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+    }
+
+    .econ-desc {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 340px;
+    }
+
+    .cost-breakdown {
+      margin-top: 32px;
+    }
+
+    .cost-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .cost-item:last-child {
+      border-bottom: none;
+    }
+
+    .cost-item .cost-label {
+      color: var(--muted);
+    }
+
+    .cost-item .cost-val {
+      font-weight: 700;
+      color: var(--text);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .cost-total {
+      padding: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      border-top: 2px solid var(--accent);
+      margin-top: 4px;
+    }
+
+    .cost-total .cost-label {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .cost-total .cost-val {
+      color: var(--accent);
+      font-size: 16px;
+    }
+
+    /* ── SCALE ── */
+    .stages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    .stage-card {
+      background: var(--card);
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stage-card::before {
+      content: attr(data-stage);
+      position: absolute;
+      top: -20px;
+      right: -10px;
+      font-family: 'Instrument Serif', serif;
+      font-size: 120px;
+      color: rgba(255, 255, 255, 0.02);
+      font-style: italic;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .stage-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .stage-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .stage-scope {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .stage-stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .sstat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      font-size: 12px;
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--text);
+    }
+
+    .revenue-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .rev-card {
+      background: var(--card);
+      padding: 32px 28px;
+    }
+
+    .rev-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      letter-spacing: 0.1em;
+    }
+
+    .rev-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .rev-amount {
+      font-size: 13px;
+      color: var(--accent);
+      font-family: 'IBM Plex Mono', monospace;
+      margin-bottom: 8px;
+    }
+
+    .rev-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── ASK ── */
+    .ask-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .ask-card {
+      background: var(--card);
+      padding: 40px 36px;
+    }
+
+    .ask-icon {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .ask-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .ask-item {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .ask-item:last-child {
+      border-bottom: none;
+    }
+
+    .ask-item::before {
+      content: '·';
+      color: var(--accent);
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .ask-highlight {
+      background: var(--accent);
+      color: #000;
+      padding: 20px 28px;
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .ask-highlight small {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      opacity: 0.7;
+      margin-bottom: 4px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 64px 64px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand {
+      font-family: 'Instrument Serif', serif;
+      font-size: 36px;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 280px;
+      line-height: 1.7;
+    }
+
+    .footer-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: right;
+      line-height: 1.8;
+    }
+
+    /* ── SCROLL ANIMATION ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:900px) {
+      nav {
+        padding: 16px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 80px 24px;
+      }
+
+      .hero {
+        padding: 0 24px 60px;
+      }
+
+      .profiles-grid,
+      .solution-layout,
+      .econ-layout,
+      .fail-grid,
+      .stages-grid,
+      .revenue-grid,
+      .ask-grid,
+      .arch-stack {
+        grid-template-columns: 1fr;
+      }
+
+      .solution-intro {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .sol-name {
+        font-size: 52px;
+        min-width: auto;
+      }
+
+      .livelihood-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 32px;
+        text-align: center;
+      }
+
+      .gap-box {
+        grid-template-columns: 1fr;
+      }
+
+      .gap-label {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Jan-Seva</div>
+    <div class="nav-links">
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#architecture">Tech</a>
+      <a href="#scale">Scale</a>
+      <a href="#ask">The Ask</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-tag">Civic Innovation · Dhruv-Tara</div>
+    <h1>Connecting<br>Local <em>Skills</em><br>with Local<br>Opportunities</h1>
+    <p class="hero-sub">A WhatsApp-based employment and service discovery platform built for the 500 million Indians who
+      are invisible to the digital economy.</p>
+    <div class="hero-bottom">
+      <div class="pill">📍 Kurla, Mumbai — Pilot</div>
+      <div class="pill">💬 WhatsApp Native</div>
+      <div class="pill">🗣 Hindi · Marathi · Voice</div>
+    </div>
+  </div>
+
+  <!-- LIVELIHOOD -->
+  <section id="livelihood" style="background:var(--surface)">
+    <div class="section-eyebrow">Theme <span>01</span></div>
+    <h2 class="section-title reveal">Livelihood &<br>Employment</h2>
+
+    <div class="livelihood-grid">
+      <div class="liv-card reveal reveal-delay-1">
+        <div class="liv-icon">💡</div>
+        <div class="liv-num">D #1 · Direct Connection</div>
+        <h3>Local Jobs, Regular Income</h3>
+        <p>Connects local workers directly with nearby customers, creating regular job opportunities and stable,
+          predictable income for informal workers.</p>
+      </div>
+      <div class="liv-card reveal reveal-delay-2">
+        <div class="liv-icon">📱</div>
+        <div class="liv-num">D #2 · Digital Identity</div>
+        <h3>WhatsApp-Based Access</h3>
+        <p>Provides informal workers a simple WhatsApp-based digital identity so they can access employment
+          opportunities without any technical skills.</p>
+      </div>
+      <div class="liv-card reveal reveal-delay-3">
+        <div class="liv-icon">🏛️</div>
+        <div class="liv-num">D #3 · Government Link</div>
+        <h3>Schemes & Development</h3>
+        <p>Links workers to relevant government livelihood and skill-development schemes to improve long-term employment
+          opportunities and upward mobility.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- USER PROFILES -->
+  <section id="problem">
+    <div class="section-eyebrow">Research <span>02</span></div>
+    <h2 class="section-title reveal">The Users<br>&amp; The Problem</h2>
+
+    <div class="profiles-grid">
+      <!-- RAMESH -->
+      <div class="profile-card reveal">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Gatto_europeo4.jpg/220px-Gatto_europeo4.jpg"
+              onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:28px>👤</span>'"
+              alt="Ramesh" />
+          </div>
+          <div>
+            <div class="profile-name">Ramesh Parekh</div>
+            <div class="profile-role">Customer · Daily Wage Worker</div>
+          </div>
+        </div>
+        <div class="profile-stats">
+          <div class="stat-cell">
+            <div class="label">Age</div>
+            <div class="val">38 years</div>
+          </div>
+          <div class="stat-cell">
+            <div class="label">Location</div>
+            <div class="val">Kurla, Mumbai</div>
+          </div>
+          <div class="stat-cell">
+            <div class="label">Income</div>
+            <div class="val">₹8,000–₹12,000/mo</div>
+          </div>
+          <div class="stat-cell">
+            <div class="label">Device</div>
+            <div class="val">Low-cost Android</div>
+          </div>
+          <div class="stat-cell">
+            <div class="label">Language</div>
+            <div class="val">Marathi / Hindi</div>
+          </div>
+          <div class="stat-cell">
+            <div class="label">Digital Skills</div>
+            <div class="val">WhatsApp only</div>
+          </div>
+        </div>
+        <div class="problem-section">
+          <h4>Pain Points — Ramesh needs a plumber urgently, but:</h4>
+          <ul class="problem-list">
+            <li>He doesn't know where to find one</li>
+            <li>Google search results are in English</li>
+            <li>Service apps like Urban Company are expensive or inaccessible</li>
+            <li>No trusted local service directory exists</li>
+          </ul>
+        </div>
+        <div class="result-box">
+          <strong>Result:</strong> People lose work opportunities, and users struggle to find trusted services.
+        </div>
+      </div>
+
+      <!-- SURESH -->
+      <div class="profile-card reveal reveal-delay-2">
+        <div class="profile-header">
+          <div class="profile-avatar" style="background:#1A2A1A;">
+            <span style="font-size:28px">🔧</span>
+          </div>
+          <div>
+            <div class="profile-name">Suresh Yadav</div>
+            <div class="profile-role">Worker · Local Plumber</div>
+          </div>
+        </div>
+        <div class="profile-stats">
+          <div class="stat-cell">
+            <div class="label">Age</div>
+            <div class="val">32 years</div>
+          </div>
+          <div class="stat-cell">
+            <div class="label">Location</div>
+            <div class="val">Kurla, Mumbai</div>
+          </div>
+          <div class="stat-cell">
+            <div class="label">Income</div>
+            <div class="val">₹7,000–₹15,000/mo</div>
+          </div>
+          <div class="stat-cell">
+            <div class="label">Device</div>
+            <div class="val">Low-cost Android</div>
+          </div>
+          <div class="stat-cell">
+            <div class="label">Language</div>
+            <div class="val">Hindi / Marathi</div>
+          </div>
+          <div class="stat-cell">
+            <div class="label">Digital Skills</div>
+            <div class="val">WhatsApp + calls</div>
+          </div>
+        </div>
+        <div class="problem-section">
+          <h4>Pain Points — Suresh is skilled, but:</h4>
+          <ul class="problem-list">
+            <li>Customers have no way to contact him</li>
+            <li>Depends entirely on word-of-mouth for work</li>
+            <li>Cannot register on existing service platforms</li>
+            <li>Urban Company requires training, app skills & high commissions</li>
+            <li>Often has idle days despite having full availability</li>
+          </ul>
+        </div>
+        <div class="result-box">
+          <strong>Result:</strong> Skilled workers lose income. Local talent remains invisible online. Workers cannot
+          reach nearby customers who need service.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CURRENT SOLUTIONS FAIL -->
+  <section style="background:var(--surface)">
+    <div class="section-eyebrow">Analysis <span>03</span></div>
+    <h2 class="section-title reveal">Why Current Solutions<br>Fail This User</h2>
+
+    <div class="fail-grid reveal">
+      <div class="fail-col">
+        <h3>From the Customer's POV</h3>
+        <div class="fail-item">
+          <div class="fail-item-header">
+            Google Search
+            <span class="fail-badge">FAILS</span>
+          </div>
+          <ul class="fail-bullets">
+            <li>Requires typing in English</li>
+            <li>Too many confusing, irrelevant results</li>
+            <li>Too many redirects, no direct route</li>
+            <li>Google Maps needs digital literacy</li>
+          </ul>
+        </div>
+        <div class="fail-item">
+          <div class="fail-item-header">
+            Urban Company / JustDial
+            <span class="fail-badge">FAILS</span>
+          </div>
+          <ul class="fail-bullets">
+            <li>Not available in many local areas</li>
+            <li>Expensive service charges</li>
+            <li>Requires app installation</li>
+            <li>Needs digital literacy</li>
+          </ul>
+        </div>
+        <div class="fail-item">
+          <div class="fail-item-header">
+            Local Word-of-Mouth
+            <span class="fail-badge">FAILS</span>
+          </div>
+          <ul class="fail-bullets">
+            <li>Slow and unreliable</li>
+            <li>Limited choices, no discovery</li>
+            <li>Can't scale beyond personal network</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fail-col">
+        <h3>From the Worker's POV</h3>
+        <div class="fail-item">
+          <div class="fail-item-header">
+            Google Search
+            <span class="fail-badge">FAILS</span>
+          </div>
+          <ul class="fail-bullets">
+            <li>Customers can't easily find local plumbers</li>
+            <li>Requires English to register a business</li>
+            <li>Hard to appear in search results</li>
+            <li>No simple way to get local customers</li>
+          </ul>
+        </div>
+        <div class="fail-item">
+          <div class="fail-item-header">
+            Urban Company / JustDial
+            <span class="fail-badge">FAILS</span>
+          </div>
+          <ul class="fail-bullets">
+            <li>High commission charges reduce earnings</li>
+            <li>Requires registration, verification & app usage</li>
+            <li>Difficult onboarding process</li>
+            <li>Not available in many local areas</li>
+          </ul>
+        </div>
+        <div class="fail-item">
+          <div class="fail-item-header">
+            Local Word-of-Mouth
+            <span class="fail-badge">FAILS</span>
+          </div>
+          <ul class="fail-bullets">
+            <li>Work depends on personal contacts only</li>
+            <li>Income is irregular and unpredictable</li>
+            <li>Takes years to build a reputation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-box reveal">
+      <div class="gap-label">Gap</div>
+      <div>
+        <p
+          style="font-size:14px;color:var(--muted);margin-bottom:20px;font-family:'IBM Plex Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;font-size:11px;">
+          What rural users actually need</p>
+        <div class="gap-needs">
+          <div class="gap-need">WhatsApp-based system</div>
+          <div class="gap-need">Voice-based interaction</div>
+          <div class="gap-need">Local language support</div>
+          <div class="gap-need">Low-cost or free access</div>
+          <div class="gap-need">Trusted local workers</div>
+          <div class="gap-need">Direct connections</div>
+          <div class="gap-need">Fair opportunity for new workers</div>
+        </div>
+        <p class="gap-tagline">No platform solves this today. Millions of workers like Suresh have skills but no digital
+          identity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section id="solution">
+    <div class="section-eyebrow">Product <span>04</span></div>
+    <h2 class="section-title reveal">Our Solution</h2>
+
+    <div class="solution-layout reveal">
+      <div class="solution-intro">
+        <div class="sol-name">Jan-<span>Seva</span></div>
+        <div class="sol-desc">
+          A WhatsApp-based employment and service discovery platform for India's 500 million low-digital-literacy users.
+          No app downloads. No English required. No expensive commissions. Just a WhatsApp message to connect workers
+          with the customers who need them — in their language, in their neighbourhood.
+        </div>
+      </div>
+
+      <div class="how-card">
+        <h3>How it Works — Customer</h3>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Send a message or voice note</h4>
+            <div class="whatsapp-demo">
+              <div class="wa-label">WhatsApp</div>
+              <div class="whatsapp-bubble">"Mujhe plumber chahiye"</div><br />
+              <div class="whatsapp-bubble hindi">"मला प्लंबर पाहिजे"</div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Request &amp; location are interpreted</h4>
+            <p>AI detects the service needed, the language, and automatically extracts location from message context.
+            </p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Receive top 5 nearby workers</h4>
+            <div class="feature-tag-list">
+              <div class="ftag"><span class="ftag-dot"></span>Name</div>
+              <div class="ftag"><span class="ftag-dot"></span>Skill</div>
+              <div class="ftag"><span class="ftag-dot"></span>Experience</div>
+              <div class="ftag"><span class="ftag-dot"></span>Rating</div>
+              <div class="ftag"><span class="ftag-dot"></span>Language</div>
+              <div class="ftag"><span class="ftag-dot"></span>Proximity</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gets-card">
+        <h3>How it Works — Worker (Plumber's POV)</h3>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Register via WhatsApp</h4>
+            <div class="whatsapp-demo">
+              <div class="wa-label">WhatsApp</div>
+              <div class="whatsapp-bubble hindi">"माझं नाव सुरेश आहे. मी प्लंबर आहे."</div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>System stores your profile</h4>
+            <p>Name, skill, experience, languages spoken, and location — all captured from a single message.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Receive job requests directly</h4>
+            <p>Get notified with customer location and required service. Accept or reject the job right from WhatsApp.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top:24px; border-top:1px solid var(--border); padding-top:24px;">
+          <h3 style="margin-bottom:16px;">What the Worker Gets</h3>
+          <ul class="gets-list">
+            <li>Regular job opportunities from nearby areas</li>
+            <li>Work requests in their own language</li>
+            <li>Digital identity without needing an app</li>
+            <li>Fair chance even for new, unknown workers</li>
+            <li>Voice-based registration support</li>
+            <li>Info on government employment schemes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNICAL ARCHITECTURE -->
+  <section id="architecture" style="background:var(--surface)">
+    <div class="section-eyebrow">Technical <span>05</span></div>
+    <h2 class="section-title reveal">Technical Architecture</h2>
+
+    <div class="flow-diagram reveal">
+      <h3>Request Processing Flow</h3>
+      <div class="flow-steps">
+        <div class="flow-step"><strong>Input</strong>User Sends Request</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><strong>Parse</strong>Voice/Text Input</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><strong>STT</strong>Speech to Text</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><strong>NLP</strong>Language Detection</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><strong>Search</strong>Detect Service</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><strong>Locate</strong>Extract Location</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><strong>Match</strong>Query Database</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step" style="background:rgba(232,255,71,0.08);border-color:var(--accent)">
+          <strong>Rank</strong>Top 5 Providers</div>
+      </div>
+    </div>
+
+    <div class="arch-stack reveal">
+      <div class="arch-card">
+        <div class="arch-card-label">Backend Stack</div>
+        <div class="arch-card-value">Next.js</div>
+        <div class="arch-card-desc">Server-side rendering and optimized performance for low-bandwidth users in rural
+          areas.</div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-label">Database</div>
+        <div class="arch-card-value">Supabase</div>
+        <div class="arch-card-desc">Real-time worker profiles, job requests, ratings, and location-based queries at
+          scale.</div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-label">APIs & Services</div>
+        <div class="arch-card-value">Sarvam · Leaflet · GMaps</div>
+        <div class="arch-card-desc">Multilingual AI via Sarvam, location discovery via Leaflet and Google Maps API
+          integration.</div>
+      </div>
+    </div>
+
+    <div class="arch-stack reveal" style="margin-top:2px;">
+      <div class="arch-card" style="background:#0D1A0D; border-color:#1A3A1A;">
+        <div class="arch-card-label" style="color:#4ADE80;">Healthcare Support</div>
+        <div class="arch-card-value" style="color:#4ADE80;font-size:14px;">User Describes → Triage → Nearest Center →
+          Ayushman Check → Return Info</div>
+        <div class="arch-card-desc">Integrated healthcare guidance pathway for rural users.</div>
+      </div>
+      <div class="arch-card" style="background:#0A0A1A; border-color:#1A1A3A;">
+        <div class="arch-card-label" style="color:#818CF8;">Government Schemes</div>
+        <div class="arch-card-value" style="color:#818CF8;font-size:14px;">Identify Schemes → Check Eligibility →
+          Provide Details → Return Info</div>
+        <div class="arch-card-desc">Automated scheme eligibility detection and information delivery.</div>
+      </div>
+      <div class="arch-card" style="background:#1A0A00; border-color:#3A1A00;">
+        <div class="arch-card-label" style="color:var(--accent2);">Provider Ranking</div>
+        <div class="arch-card-value" style="color:var(--accent2);font-size:14px;">Proximity Score → Check Rating → Boost
+          New → Sort & Rank</div>
+        <div class="arch-card-desc">Smart ranking that gives new workers a fair chance alongside established ones.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIT ECONOMICS -->
+  <section>
+    <div class="section-eyebrow">Business <span>06</span></div>
+    <h2 class="section-title reveal">Unit Economics</h2>
+
+    <div class="econ-layout reveal">
+      <div class="econ-left">
+        <div class="big-number">₹5</div>
+        <p class="econ-desc">per user per month — affordable enough to scale across millions of rural users through
+          government and NGO partnerships.</p>
+        <div class="cost-breakdown">
+          <div class="cost-item">
+            <span class="cost-label">WhatsApp API (50 msgs/req × 10 req)</span>
+            <span class="cost-val">₹3.00</span>
+          </div>
+          <div class="cost-item">
+            <span class="cost-label">AI Processing — STT (10–15 sec avg)</span>
+            <span class="cost-val">₹1.00</span>
+          </div>
+          <div class="cost-item">
+            <span class="cost-label">LLM — Intent + Language + Matching</span>
+            <span class="cost-val">₹1.00</span>
+          </div>
+          <div class="cost-item">
+            <span class="cost-label">Database & Server (per 1000 users)</span>
+            <span class="cost-val">₹0.50</span>
+          </div>
+          <div class="cost-total">
+            <span class="cost-label">Total Cost / User / Month</span>
+            <span class="cost-val">₹5.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="econ-right">
+        <h3
+          style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:28px;">
+          Why This Model Works</h3>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="background:var(--surface);border:1px solid var(--border);padding:20px 24px;">
+            <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Government Subsidy Model</div>
+            <div style="font-size:13px;color:var(--muted);line-height:1.7;">At ₹5/user, state governments can subsidize
+              entire districts as part of livelihood schemes. Cost is lower than a single SMS bulk campaign.</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);padding:20px 24px;">
+            <div style="font-size:13px;font-weight:700;margin-bottom:6px;">NGO Partnership</div>
+            <div style="font-size:13px;color:var(--muted);line-height:1.7;">NGOs working in rural employment can onboard
+              entire communities for less than ₹500/month per 100 users.</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);padding:20px 24px;">
+            <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Worker Subscription</div>
+            <div style="font-size:13px;color:var(--muted);line-height:1.7;">Workers pay ₹20–₹50/month — a fraction of
+              what they'd earn from a single additional job per month found through the platform.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCALE -->
+  <section id="scale" style="background:var(--surface)">
+    <div class="section-eyebrow">Growth <span>07</span></div>
+    <h2 class="section-title reveal">Scale &amp; Sustainability</h2>
+
+    <div class="stages-grid reveal">
+      <div class="stage-card" data-stage="1">
+        <div class="stage-label">Stage 01 · Now</div>
+        <div class="stage-title">Pilot</div>
+        <div class="stage-scope">Mumbai / Kurla</div>
+        <div class="stage-stats">
+          <div class="sstat">100 Users</div>
+          <div class="sstat">50 Workers</div>
+        </div>
+      </div>
+      <div class="stage-card" data-stage="2" style="border-left:1px solid var(--accent);">
+        <div class="stage-label" style="color:var(--accent2);">Stage 02 · 2025</div>
+        <div class="stage-title">Expansion</div>
+        <div class="stage-scope">Maharashtra-wide</div>
+        <div class="stage-stats">
+          <div class="sstat">10,000 Users</div>
+        </div>
+        <div style="margin-top:16px;">
+          <div
+            style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">
+            Partners</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <div class="sstat">NGOs</div>
+            <div class="sstat">Panchayats</div>
+            <div class="sstat">Skill Centers</div>
+          </div>
+        </div>
+      </div>
+      <div class="stage-card" data-stage="3" style="background:rgba(232,255,71,0.04);border-color:var(--accent);">
+        <div class="stage-label" style="color:var(--accent);">Stage 03 · 2026</div>
+        <div class="stage-title" style="color:var(--accent);">Nationwide</div>
+        <div class="stage-scope" style="color:var(--text);">Pan India</div>
+        <div class="stage-stats">
+          <div class="sstat" style="background:rgba(232,255,71,0.1);border-color:var(--accent);color:var(--accent);">10
+            Lakh Users</div>
+        </div>
+        <div
+          style="margin-top:20px;font-family:'Instrument Serif',serif;font-size:14px;color:var(--muted);font-style:italic;">
+          The system becomes self-sustaining.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:2px;" class="reveal">
+      <div style="padding:20px 24px;border:1px solid var(--border);background:var(--card);margin-bottom:2px;">
+        <div
+          style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">
+          Sustainability Model — Revenue Sources</div>
+      </div>
+      <div class="revenue-grid">
+        <div class="rev-card">
+          <div class="rev-num">01</div>
+          <div class="rev-title">Worker Subscription</div>
+          <div class="rev-amount">₹20–₹50 / month</div>
+          <div class="rev-desc">Per registered worker. Affordable relative to income gained from even a single new job
+            found through the platform.</div>
+        </div>
+        <div class="rev-card">
+          <div class="rev-num">02</div>
+          <div class="rev-title">Premium Listing</div>
+          <div class="rev-amount">₹100 / month</div>
+          <div class="rev-desc">Workers pay to appear first in search results. Opt-in, transparent, fair — never
+            mandatory.</div>
+        </div>
+        <div class="rev-card">
+          <div class="rev-num">03</div>
+          <div class="rev-title">Government Partnerships</div>
+          <div class="rev-amount">Subsidized Access</div>
+          <div class="rev-desc">Employment programs and state government schemes fund platform access for entire
+            communities.</div>
+        </div>
+        <div class="rev-card">
+          <div class="rev-num">04</div>
+          <div class="rev-title">CSR Funding</div>
+          <div class="rev-amount">Village Sponsorships</div>
+          <div class="rev-desc">Companies fulfill CSR obligations by sponsoring villages — funding full community access
+            and worker registration.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE ASK -->
+  <section id="ask">
+    <div class="section-eyebrow">Ask <span>08</span></div>
+    <h2 class="section-title reveal">The Ask</h2>
+
+    <div class="ask-grid reveal">
+      <div class="ask-card">
+        <div class="ask-icon">💰</div>
+        <div class="ask-title">Funding</div>
+        <div class="ask-highlight">
+          <small>Seed Requirement</small>
+          ₹2–3 Lakhs
+        </div>
+        <div style="margin-top:16px;">
+          <div class="ask-item">WhatsApp Business API costs</div>
+          <div class="ask-item">Server infrastructure setup</div>
+          <div class="ask-item">AI processing (Sarvam STT + LLM)</div>
+          <div class="ask-item">Field testing and user research</div>
+        </div>
+      </div>
+
+      <div class="ask-card">
+        <div class="ask-icon">🎯</div>
+        <div class="ask-title">Mentorship</div>
+        <div style="background:var(--surface);border:1px solid var(--border);padding:20px;margin-bottom:16px;">
+          <div style="font-size:13px;color:var(--muted);line-height:1.8;">We're looking for guides who have navigated
+            the complex landscape of rural tech deployment in India.</div>
+        </div>
+        <div class="ask-item">Rural deployment guidance</div>
+        <div class="ask-item">Government partnership navigation</div>
+        <div class="ask-item">NGO network connections</div>
+        <div class="ask-item">Regulatory and compliance support</div>
+      </div>
+
+      <div class="ask-card">
+        <div class="ask-icon">🧪</div>
+        <div class="ask-title">Testing Access</div>
+        <div style="background:var(--surface);border:1px solid var(--border);padding:20px;margin-bottom:16px;">
+          <div style="font-size:13px;color:var(--muted);line-height:1.8;">We need a real community to test, iterate, and
+            validate before scaling.</div>
+        </div>
+        <div class="ask-item">Access to 1–2 pilot villages</div>
+        <div class="ask-item">100 test users (customers)</div>
+        <div class="ask-item">50 workers for onboarding trial</div>
+        <div class="ask-item">6-week feedback cycle</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-brand">Jan-Seva</div>
+      <p class="footer-tagline">Connecting local skills with local opportunities — one WhatsApp message at a time.</p>
+    </div>
+    <div class="footer-meta">
+      Dhruv-Tara Civic Innovation<br />
+      Mumbai, Maharashtra<br />
+      Kurla Pilot · 2024<br />
+      <span style="color:var(--accent);">janseva.in</span>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection observer for scroll reveals
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>
