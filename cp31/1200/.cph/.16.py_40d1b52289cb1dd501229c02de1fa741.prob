@@ -1,0 +1,1 @@
+{"name":"Local: 16","url":"/Users/advaitdesai/Programming/CpDsa/cp31/1200/16.py","tests":[{"id":1774371382437,"input":"5 5\n1 2 3 4 5\n1 1 5\n2 10\n1 5 11\n1 4 1\n2 1\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/advaitdesai/Programming/CpDsa/cp31/1200/16.py","group":"local","local":true}
