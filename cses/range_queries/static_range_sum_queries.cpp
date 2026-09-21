@@ -1,27 +1,26 @@
-#include <bits/stdc++.h>
-#define all(s) s.begin(), s.end()
+#include<bits/stdc++.h>
 using namespace std;
-using ll=long long;
-#define vecin(vec) for(auto &x : (vec)) cin >> x;
+#define ll long long
 
-int main() {
-	ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
-	ll n, q;
-    cin >> n >> q;
+int main(){
+    int n, q; cin >> n >> q;
 
-    vector<ll> a(n);
-    vecin(a);
+    vector<ll> v(n); for(ll i = 0; i < n; i++) cin >> v[i];
 
-    vector<ll> prefix_sum(n+1, 0);
-    for(ll i = 1; i <= n; i++){
-        prefix_sum[i] = prefix_sum[i-1] + a[i-1];
+    vector<ll>presum(n+1);
+    presum[0] = 0;
+
+    for(ll i = 0; i < n; i++){
+        presum[i+1] = presum[i] + v[i];
     }
 
-    for(ll i = 0; i < q; i++){
-        ll a, b;
-        cin >> a >> b;
-        cout << max(prefix_sum[b], prefix_sum[a-1]) - min(prefix_sum[b], prefix_sum[a-1]) << endl;
+    while(q--){
+        ll l, r;
+        cin >> l >> r;
+
+        cout << presum[r] - presum[l-1] << "\n";
     }
 
-	return 0;
+
 }
+
